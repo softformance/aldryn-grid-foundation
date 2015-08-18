@@ -9,7 +9,7 @@ Installation
 
 # TODO
 
-This plugin requires `django CMS` 2.4 or higher to be properly installed.
+This plugin requires `django CMS` 3.0 or higher to be properly installed.
 
 * In your projects `virtualenv`_, run ``pip install aldryn-grid-foundation``.
 * Add ``'aldryn_grid_foundation'`` to your ``INSTALLED_APPS`` setting.
