@@ -51,6 +51,7 @@ class GridColumnPluginForm(forms.ModelForm):
 
     class Meta:
         model = GridColumnFoundation
+        exclude = []
 
     def clean(self):
         data = super(GridColumnPluginForm, self).clean()
