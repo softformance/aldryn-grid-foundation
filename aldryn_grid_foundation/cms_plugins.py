@@ -5,8 +5,8 @@ from cms.models import CMSPlugin
 from cms.plugin_pool import plugin_pool
 from cms.plugin_base import CMSPluginBase
 
-from aldryn_grid_foundation.forms import GridPluginForm, GridColumnPluginForm
-from aldryn_grid_foundation.models import GridFoundation, GridColumnFoundation, GRID_CONFIG
+from .forms import GridPluginForm, GridColumnPluginForm
+from .models import GridFoundation, GridColumnFoundation, GRID_CONFIG
 
 
 class GridFoundationPlugin(CMSPluginBase):
@@ -58,6 +58,7 @@ class GridColumnFoundationPlugin(CMSPluginBase):
             'placeholder': placeholder,
         })
         return context
+
 
 plugin_pool.register_plugin(GridFoundationPlugin)
 plugin_pool.register_plugin(GridColumnFoundationPlugin)

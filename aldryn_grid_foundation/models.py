@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from functools import partial
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _, string_concat
-from django.conf import settings
 
 from cms.models import CMSPlugin
 
@@ -24,12 +24,21 @@ ColumnSizeField = partial(
     blank=True
 )
 
+CMSPluginField = partial(
+    models.OneToOneField,
+    to=CMSPlugin,
+    related_name='%(app_label)s_%(class)s',
+    parent_link=True,
+)
+
 
 class GridFoundation(CMSPlugin):
     custom_classes = models.CharField(_('custom classes'), max_length=200, blank=True)
+    cmsplugin_ptr = CMSPluginField()
 
     def __unicode__(self):
-        return _(u"%s columns") % self.cmsplugin_set.all().count()
+        column_count = len(self.child_plugin_instances or [])
+        return _(u"%s columns") % column_count
 
 
 class GridColumnFoundation(CMSPlugin):
@@ -41,6 +50,7 @@ class GridColumnFoundation(CMSPlugin):
         max_length=200,
         blank=True
     )
+    cmsplugin_ptr = CMSPluginField()
 
     def __unicode__(self):
         result = []
