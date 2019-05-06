@@ -13,7 +13,7 @@ GRID_CONFIG.update(getattr(settings, 'ALDRYN_GRID_FOUNDATION_CONFIG', {}))
 
 
 ALDRYN_GRID_FOUNDATION_CHOICES = [
-    (i, string_concat(unicode(i), ' ', _('columns'))) for i in range(1, GRID_CONFIG['COLUMNS']+1)
+    (i, string_concat(str(i), ' ', _('columns'))) for i in range(1, GRID_CONFIG['COLUMNS']+1)
 ]
 
 ColumnSizeField = partial(
@@ -36,9 +36,9 @@ class GridFoundation(CMSPlugin):
     custom_classes = models.CharField(_('custom classes'), max_length=200, blank=True)
     cmsplugin_ptr = CMSPluginField()
 
-    def __unicode__(self):
+    def __str__(self):
         column_count = len(self.child_plugin_instances or [])
-        return _(u"%s columns") % column_count
+        return _("%s columns") % column_count
 
 
 class GridColumnFoundation(CMSPlugin):
@@ -52,7 +52,7 @@ class GridColumnFoundation(CMSPlugin):
     )
     cmsplugin_ptr = CMSPluginField()
 
-    def __unicode__(self):
+    def __str__(self):
         result = []
         if self.size_small:
             result.append('small-%d' % self.size_small)
@@ -60,4 +60,4 @@ class GridColumnFoundation(CMSPlugin):
             result.append('medium-%d' % self.size_medium)
         if self.size_large:
             result.append('large-%d' % self.size_large)
-        return u' '.join(result)
+        return ' '.join(result)

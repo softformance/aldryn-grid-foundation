@@ -29,7 +29,7 @@ class GridFoundationPlugin(CMSPluginBase):
     def save_model(self, request, obj, form, change):
         response = super(GridFoundationPlugin, self).save_model(request, obj, form, change)
         if not change:
-            for x in xrange(int(form.cleaned_data['create'])):
+            for x in range(int(form.cleaned_data['create'])):
                 col = GridColumnFoundation(
                     parent=obj,
                     placeholder=obj.placeholder,
