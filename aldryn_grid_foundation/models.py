@@ -3,9 +3,17 @@ from functools import partial
 
 from django.conf import settings
 from django.db import models
-from django.utils.translation import ugettext_lazy as _, string_concat
+from django.utils.translation import ugettext_lazy as _
 
 from cms.models import CMSPlugin
+
+try:
+    from django.utils.translation import string_concat
+except ImportError:
+    from django.utils.text import format_lazy
+
+    def string_concat(*strings):
+        return format_lazy('{}' * len(strings), *strings)
 
 
 GRID_CONFIG = {'COLUMNS': 24, 'TOTAL_WIDTH': 960, 'GUTTER': 20}
